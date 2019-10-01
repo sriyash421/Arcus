@@ -5,23 +5,8 @@
 import pygame
 import random
 import math
+from constants import *
 from os import path
-
-# constants
-WIDTH = 1700
-HEIGHT = 1000
-FPS = 30
-GRAVITY = 0.15
-
-
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-RED = (200, 0, 0)
-BRIGHT_RED = (255, 0, 0)
-GREEN = (0, 200, 0)
-BRIGHT_GREEN = (0, 255, 0)
-SKY_BLUE = (0, 255, 255)
-BLUE = (0, 0, 255)
 
 
 pygame.init()
@@ -37,13 +22,13 @@ misses = 0
 highscore = 0
 score = 0
 PAUSE = False
-with open("assets/highscore.txt", "r") as file:
+with open(HIGHSCORE_FILE, "r") as file:
     highscore = int(file.readline())
 
 arrow_img = pygame.image.load(
-    path.join(path.dirname(__file__), "assets/arrow_1.png")).convert()
+    path.join(path.dirname(__file__), ARROW_IMAGE)).convert()
 background = pygame.image.load(
-    path.join(path.dirname(__file__), "assets/background.png")).convert()
+    path.join(path.dirname(__file__), BACKGROUND_IMAGE)).convert()
 background = pygame.transform.scale(background, (WIDTH, HEIGHT))
 background_rect = background.get_rect()
 baloon_color = ["black", "blue", "red", "green"]
@@ -55,9 +40,9 @@ for i in range(9):
     explosion.append(temp)
 
 explosion_sound = pygame.mixer.Sound(
-    path.join(path.dirname(__file__), "assets/boom.wav"))
+    path.join(path.dirname(__file__), EXPLOSION_SOUND))
 select_sound = pygame.mixer.Sound(
-    path.join(path.dirname(__file__), "assets/select.wav"))
+    path.join(path.dirname(__file__), CLICK_SOUND))
 
 
 class Explosion(pygame.sprite.Sprite):
@@ -69,7 +54,7 @@ class Explosion(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = position
         self.current = pygame.time.get_ticks()
-        self.frame_rate = 50
+        self.frame_rate = FPS
         self.i = 0
         explosion_sound.play()
         # print(self.i)
@@ -93,7 +78,7 @@ class Explosion(pygame.sprite.Sprite):
 class Arrow(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.image_orig = pygame.transform.scale(arrow_img, (16, 150))
+        self.image_orig = pygame.transform.scale(arrow_img, ARROW_SIZE)
         self.image_orig.set_colorkey(BLACK)
         self.image = self.image_orig
         self.rect = self.image.get_rect()
@@ -164,7 +149,7 @@ class Arrow(pygame.sprite.Sprite):
                         theta = math.atan(
                             (mouse[1]-self.rect.bottom)/(self.rect.centerx-mouse[0]))
                     else:
-                        theta = 3.14
+                        theta = PI
                     move = theta-self.rot
                     self.rot = math.degrees(theta)
                     new_image = pygame.transform.rotate(
@@ -195,10 +180,10 @@ class Baloon(pygame.sprite.Sprite):
         elif bcolor == "red":
             self.image_orig.set_colorkey(BRIGHT_RED)
 
-        self.image_orig = pygame.transform.scale(self.image_orig, (100, 100))
+        self.image_orig = pygame.transform.scale(self.image_orig, BALOON_SIZE)
         self.image = self.image_orig.copy()
         self.rect = self.image.get_rect()
-        self.radius = 15
+        self.radius = HIT_RADIUS
 
         temp = random.randrange(WIDTH - self.rect.width)
         while (-150 < temp-WIDTH/2 < 150):
@@ -242,7 +227,7 @@ def Button(x, y, string, color2, color1, function, w, h):
     click = pygame.mouse.get_pressed()
     DrawRect(x, y, w, h, color1)
     if x <= mouse[0] <= x+w and y <= mouse[1] <= y+h:
-        DrawRect(x, y, w, h, color2)
+        DrawRect(x, y, w, int(h), color2)
         if (click[0] == 1):
             select_sound.play()
             function()
@@ -358,7 +343,7 @@ def gameloop():
 
         all_sprites.update()
 
-        if misses > 15:
+        if misses > MISSES:
             replay()
         screen.fill(SKY_BLUE)
         screen.blit(background, background_rect)
@@ -378,7 +363,7 @@ def gameloop():
 
 pygame.mixer.music.load(
     (path.join(path.dirname(__file__), "assets/tgfcoder-FrozenJam-SeamlessLoop.ogg")))
-pygame.mixer.music.set_volume(0.2)
+pygame.mixer.music.set_volume(VOLUME)
 
 intro = True
 while intro:
@@ -391,7 +376,7 @@ while intro:
     screen.blit(background, background_rect)
     Button(200, 2*HEIGHT/3, "PLAY", BRIGHT_GREEN, GREEN, gameloop, 150, 100)
     Button(WIDTH-450, 2*HEIGHT/3, "QUIT", BRIGHT_RED, RED, quit, 150, 100)
-    draw_text("_ArcuS_", WIDTH/2, HEIGHT/3, 200, BLUE)
+    draw_text("__ArcuS__", WIDTH/2, HEIGHT/3, 200, BLUE)
     draw_text("HIGH SCORE:%d" % (highscore), WIDTH-400, 50, 30, BLACK)
     pygame.display.flip()
     clock.tick(FPS)

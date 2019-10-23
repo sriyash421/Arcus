@@ -214,15 +214,17 @@ def text_objects(text, font, color):
 
 def draw_text(text, x, y, s, color):
     font_name = pygame.font.match_font('comicsansms.ttf')
+    s = int(s)
     largeText = pygame.font.Font(font_name, s)
     TextSurf, TextRect = text_objects(text, largeText, color)
     TextRect.center = ((x, y))
     screen.blit(TextSurf, TextRect)
 
 
-def Button(x, y, string, color2, color1, function, w, h):
+def Button(x,y , string, color2, color1, function, w, h):
     global mouse
     global click
+    y = int(y) 
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
     DrawRect(x, y, w, h, color1)

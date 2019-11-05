@@ -20,6 +20,7 @@ BACKGROUND_IMAGE = "assets/background.png"
 
 EXPLOSION_SOUND = "assets/boom.wav"
 CLICK_SOUND = "assets/select.wav"
+MUSIC_FILE = "assets/tgfcoder-FrozenJam-SeamlessLoop.ogg"
 VOLUME = 0.2
 
 ARROW_SIZE = (16, 150)

@@ -5,6 +5,7 @@ from constants import *
 from os import path
 from objects import *
 from animation import *
+import socket
 
 class Game :
     def __init__(self) :
@@ -38,6 +39,8 @@ class Game :
         self.last_baloon_time = 0
         self.last_arrow_time = 0
 
+        self.multi = False
+
         self.explosion = []
         for i in range(9):
             filename = "assets/regularExplosion0{}.png".format(i)
@@ -51,8 +54,11 @@ class Game :
             path.join(path.dirname(__file__), CLICK_SOUND))
 
     def readHighScore(self) :
-        with open(HIGHSCORE_FILE, "r") as file:
-            self.highscore = int(file.readline())
+        try :
+            with open(HIGHSCORE_FILE, "r") as file:
+                self.highscore = int(file.readline())
+        except :
+                self.highscore = 0
     
     def writeHighScore(self) :
         with open(HIGHSCORE_FILE, "w") as file:
@@ -140,7 +146,8 @@ class Game :
         self.last_baloon_time = pygame.time.get_ticks()
         running = True
         while running:
-
+            if self.multi :
+                self.sendPacket()
             self.clock.tick(FPS)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -177,8 +184,28 @@ class Game :
             if self.misses > MISSES:
                 self.replay()
             self.game_screen()
-            pygame.display.flip()
 
+            if self.multi :
+                oppscore = int(self.recvPacket())
+                self.draw.draw_text("OPPONENT : %d" % (oppscore),WIDTH-200, HEIGHT-200, 50, BLUE)
+
+            pygame.display.flip()
+            
+            
+    def sendPacket(self):
+        print("send")
+        try :
+            self.sock.send(str.encode(str(self.score)))
+        except :
+            print("Error")
+    
+    def recvPacket(self):
+        print("recv")
+        try :
+            return self.sock.recv(1024)
+        except :
+            return 0
+    
     def game_screen(self) :
         self.screen.fill(SKY_BLUE)
         self.screen.blit(self.background, self.background_rect)
@@ -192,6 +219,26 @@ class Game :
         self.draw.draw_text("SCORE : %d" % (self.score), WIDTH-200, HEIGHT-100, 40, BLUE)
         self.draw.draw_text("HIGH SCORE : %d" % (self.highscore),
                 WIDTH-200, HEIGHT-50, 40, BLUE)
+    
+    def multiplayer(self):
+        self.sock = socket.socket()
+        self.sock.connect((SERVER_IP,PORT))
+        while True :
+            print("waiting")
+            self.screen.fill(SKY_BLUE)
+            self.screen.blit(self.background, self.background_rect)
+            self.draw.draw_text("WAITING", WIDTH/2, HEIGHT/3, 200, BLUE)
+            self.draw.Button(WIDTH/2-50, HEIGHT-200, "QUIT", BRIGHT_RED, RED, quit, 100, 100)
+            pygame.display.flip()
+            status = self.sock.recv(10).decode('utf-8')
+            print(status)
+            if status == "Success" :
+                break
+        
+        self.multi = True
+        print("con")
+        # self.sendPacket()
+        self.gameloop()
 
 class Draw() :
     def __init__(self,game) :

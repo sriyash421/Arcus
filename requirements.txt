@@ -1,0 +1,7 @@
+pygame
+random
+math
+os
+socket
+select 
+sys

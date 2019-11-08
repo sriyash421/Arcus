@@ -14,7 +14,7 @@ BRIGHT_GREEN = (0, 255, 0)
 SKY_BLUE = (0, 255, 255)
 BLUE = (0, 0, 255)
 
-HIGHSCORE_FILE="assets/highscore.txt"
+HIGHSCORE_FILE="highscore.txt"
 ARROW_IMAGE = "assets/arrow_1.png"
 BACKGROUND_IMAGE = "assets/background.png"
 

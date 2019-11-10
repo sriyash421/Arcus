@@ -14,12 +14,13 @@ BRIGHT_GREEN = (0, 255, 0)
 SKY_BLUE = (0, 255, 255)
 BLUE = (0, 0, 255)
 
-HIGHSCORE_FILE="assets/highscore.txt"
+HIGHSCORE_FILE="highscore.txt"
 ARROW_IMAGE = "assets/arrow_1.png"
 BACKGROUND_IMAGE = "assets/background.png"
 
 EXPLOSION_SOUND = "assets/boom.wav"
 CLICK_SOUND = "assets/select.wav"
+MUSIC_FILE = "assets/tgfcoder-FrozenJam-SeamlessLoop.ogg"
 VOLUME = 0.2
 
 ARROW_SIZE = (16, 150)

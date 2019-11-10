@@ -1,7 +1,7 @@
 # **ArcuS**
 
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)<br>
-
+[![Join the chat at https://gitter.im/ArcusChat/community](https://badges.gitter.im/ArcusChat/community.svg)](https://gitter.im/ArcusChat/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 **Arcus** is 2D shooting game made in Python using pygame.
 

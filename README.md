@@ -1,11 +1,8 @@
 # Arcus
-A simple game made in Python2 using pygame
-
-To start the game place all the assets attached to the mail under one folder and run the Spacemania.py script using python2
-
+A simple game made in Python using pygame
 
 ### Requirements :-
-1. Python2
+1. Python(2 or 3)
 2. pygame 
       install it by typing
 
@@ -15,6 +12,9 @@ To start the game place all the assets attached to the mail under one folder and
 
       `pip install pygame`
   
+## How to play :-
+1. Clone the repo
+2. Run `python main.py`
 
 ### Controls :-
 

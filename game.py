@@ -51,8 +51,11 @@ class Game :
             path.join(path.dirname(__file__), CLICK_SOUND))
 
     def readHighScore(self) :
-        with open(HIGHSCORE_FILE, "r") as file:
-            self.highscore = int(file.readline())
+        try :
+            with open(HIGHSCORE_FILE, "r") as file:
+                self.highscore = int(file.readline())
+        except :
+            self.highscore = 0
     
     def writeHighScore(self) :
         with open(HIGHSCORE_FILE, "w") as file:

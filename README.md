@@ -1,13 +1,13 @@
-# Arcus
+# **ArcuS**
 
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)<br>
 
 
 **Arcus** is 2D shooting game made in Python using pygame.
 
-## GamePlay
-![screenshot](https://imgur.com/fDoJMRi "in-game screenshot")
-![screenshot](https://imgur.com/NDUIJXG "in-game screenshot")
+## GamePlay :-
+![screenshot](https://i.imgur.com/fDoJMRi.png "in-game screenshot")
+![screenshot](https://imgur.com/NDUIJXG.png "in-game screenshot")
 
 ## Multiplayer :-
 
@@ -46,13 +46,11 @@ checkout the multiplayer branch
 2. Drag the arrow to increase velocity
 3. Release to Shoot
 
-## Contributons
+### Contributons :-
+1. All contributions are welcome. 
+2. Please feel free to open any new issues for bugs or feature requests.
+3. Please try to include a screenshot with the pull request if any visual changes are made to the game. 
+4. Please feel free to communicate on the gitter channel if you face any problem.
 
-All contributions are welcome. 
-Please feel free to open any new issues for bugs or feature requests.
-Please try to include a screenshot with the pull request if any visual changes are made to the game. 
-Please feel free to ping onthe gitter channel if you face any problem.
-
-## Communication channel
-
+### Communication channel :-
 [Gitter](https://gitter.im/ArcusChat/community)

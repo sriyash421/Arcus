@@ -6,6 +6,7 @@ from os import path
 from objects import *
 from animation import *
 
+# Game Class has in game functions
 class Game :
     def __init__(self) :
         pygame.init()
@@ -196,6 +197,8 @@ class Game :
         self.draw.draw_text("HIGH SCORE : %d" % (self.highscore),
                 WIDTH-200, HEIGHT-50, 40, BLUE)
 
+
+#Class to draw text and surfaces on screen
 class Draw() :
     def __init__(self,game) :
         self.game = game

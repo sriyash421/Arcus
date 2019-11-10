@@ -5,6 +5,7 @@ import pygame
 from game import *
 
 
+#Function for opening screen
 def main() :
     intro = True
     game = Game()

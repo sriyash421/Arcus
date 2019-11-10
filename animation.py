@@ -2,7 +2,7 @@ import pygame
 from os import path
 from constants import *
 
-
+##Explosion class to generate animation effect
 class Explosion(pygame.sprite.Sprite):
     def __init__(self,position,size,game):
         pygame.sprite.Sprite.__init__(self)

@@ -1,4 +1,7 @@
 # Arcus
+
+[![Join the chat at https://gitter.im/ArcusChat/community](https://badges.gitter.im/ArcusChat/community.svg)](https://gitter.im/ArcusChat/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 A simple game made in Python using pygame
 
 ### Requirements :-

@@ -13,6 +13,9 @@ GREEN = (0, 200, 0)
 BRIGHT_GREEN = (0, 255, 0)
 SKY_BLUE = (0, 255, 255)
 BLUE = (0, 0, 255)
+GREEN_YELLOW=(181,255,98)
+BROWN=(204,102,0)
+DARK_BROWN=(204,76,0)
 
 HIGHSCORE_FILE="highscore.txt"
 ARROW_IMAGE = "assets/arrow_1.png"

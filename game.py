@@ -143,6 +143,7 @@ class Game :
         # last_arrow_time = pygame.time.get_ticks()
         self.last_baloon_time = pygame.time.get_ticks()
         running = True
+#         self.instruction_screen()
         while running:
 
             self.clock.tick(FPS)
@@ -189,14 +190,38 @@ class Game :
         self.all_sprites.draw(self.screen)
         self.draw.Button(WIDTH-120, 20, "PAUSE", BRIGHT_GREEN,
                 GREEN, self.pause_function, 100, 100)
-        self.draw.Button(WIDTH-120, 140, "QUIT", BRIGHT_RED, RED, quit, 100, 100)
-        self.draw.Button(WIDTH-120, 280, "RESTART", BLUE, SKY_BLUE, self.gameloop, 100, 100)
+        self.draw.Button(WIDTH-120, 140, "Instructions", BRIGHT_GREEN,
+                GREEN, self.instruction_screen, 100, 100)
+        self.draw.Button(WIDTH-120, 260, "QUIT", BRIGHT_RED, RED, quit, 100, 100)
+        self.draw.Button(WIDTH-120, 380, "RESTART", BLUE, SKY_BLUE, self.gameloop, 100, 100)
         self.draw.draw_text("MISSES : %d" % (self.misses), WIDTH -
                 200, HEIGHT-150, 50, BRIGHT_RED)
         self.draw.draw_text("SCORE : %d" % (self.score), WIDTH-200, HEIGHT-100, 40, BLUE)
         self.draw.draw_text("HIGH SCORE : %d" % (self.highscore),
                 WIDTH-200, HEIGHT-50, 40, BLUE)
-
+   
+   #screen when instruction button is clicked
+    def instruction_screen(self):
+        self.instruction = True
+        while self.instruction:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    quit()
+                self.draw.DrawRect(150,150,WIDTH-300,HEIGHT-300,GREEN_YELLOW) 
+                x=600
+                y=300
+                self.draw.draw_text("Instructions",WIDTH/2,y-100,80,BLACK)
+                self.draw.draw_text("1. Use mouse to direct the arrow.",x,y,60,BLACK)
+                self.draw.draw_text("2. Click on the arrow to shoot.",x-27,y+80,60,BLACK)
+                self.draw.draw_text("3. Drag the arrow to increase velocity",x+50,y+160,60,BLACK)
+                self.draw.draw_text(" and then release to shoot.",x-20,y+220,60,BLACK)
+                self.draw.Button(WIDTH-930, 2*HEIGHT/3, "RESUME",DARK_BROWN,BROWN,self.resume, 150, 100)
+                pygame.display.flip()
+                self.clock.tick(FPS)
+                
+   #function to resume the game             
+    def resume(self):
+        self.instruction=False
 
 #Class to draw text and surfaces on screen
 class Draw() :
@@ -231,3 +256,5 @@ class Draw() :
                 self.game.select_sound.play()
                 function()
         self.draw_text(string, x+w/2, y+h/2, (w+h)/8, BLACK)
+        
+    

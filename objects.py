@@ -10,12 +10,14 @@ from constants import *
 class Arrow(pygame.sprite.Sprite):
     def __init__(self,game):
         pygame.sprite.Sprite.__init__(self)
+        self.WIDTH = game.WIDTH
+        self.HEIGHT = game.HEIGHT
         self.image_orig = pygame.transform.scale(game.arrow_img, ARROW_SIZE)
         self.image_orig.set_colorkey(BLACK)
         self.image = self.image_orig
         self.rect = self.image.get_rect()
-        self.rect.centerx = WIDTH/2
-        self.rect.bottom = HEIGHT-100
+        self.rect.centerx = self.WIDTH/2
+        self.rect.bottom = self.HEIGHT-100
         self.rot = 0
         self.speedx = 0
         self.speedy = 0
@@ -98,7 +100,8 @@ class Arrow(pygame.sprite.Sprite):
 class Baloon(pygame.sprite.Sprite):
     def __init__(self,game):
         pygame.sprite.Sprite.__init__(self)
-
+        self.WIDTH = game.WIDTH
+        self.HEIGHT = game.HEIGHT
         bcolor = random.choice(game.baloon_color)
         temp = "assets/balloon_{}.png".format(bcolor)
         self.image_orig = pygame.image.load(
@@ -117,11 +120,11 @@ class Baloon(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.radius = HIT_RADIUS
 
-        temp = random.randrange(WIDTH - self.rect.width)
-        while (-150 < temp-WIDTH/2 < 150):
-            temp = random.randrange(WIDTH - self.rect.width)
+        temp = random.randrange(self.WIDTH - self.rect.width)
+        while (-150 < temp-self.WIDTH/2 < 150):
+            temp = random.randrange(self.WIDTH - self.rect.width)
         self.rect.x = temp
-        self.rect.y = random.randrange(HEIGHT+100, HEIGHT+150)
+        self.rect.y = random.randrange(self.HEIGHT+100, self.HEIGHT+150)
         self.speedy = random.randrange(-4, -1)
         self.speedx = random.randrange(-3, 3)
         self.game = game
@@ -130,6 +133,6 @@ class Baloon(pygame.sprite.Sprite):
 
     def update(self):
         self.rect.y += self.speedy
-        if self.rect.top < -20 or self.rect.left < -25 or self.rect.right > WIDTH + 20:
+        if self.rect.top < -20 or self.rect.left < -25 or self.rect.right > self.WIDTH + 20:
             self.kill()
             self.game.misses += 1

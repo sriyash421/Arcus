@@ -1,6 +1,5 @@
 # constants
-WIDTH = 1700
-HEIGHT = 1000
+
 FPS = 60
 GRAVITY = 0.15
 PI = 3.142

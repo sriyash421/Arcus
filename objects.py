@@ -44,7 +44,9 @@ class Arrow(pygame.sprite.Sprite):
             self.rect = self.image.get_rect()
             self.rect.center = old_center
             # print "moving"
-
+            if self.rect.bottom < 0 or self.rect.left > self.WIDTH + 10 or self.rect.right < -10:
+                self.kill()
+            
         else:
             mouse = pygame.mouse.get_pos()
             click = pygame.mouse.get_pressed()

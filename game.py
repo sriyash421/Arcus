@@ -84,7 +84,8 @@ class Game :
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     quit()
-
+            self.screen.fill(SKY_BLUE)
+            self.screen.blit(self.background, self.background_rect)
             self.draw.Button(200, 2*self.HEIGHT/3, "CONTINUE", BRIGHT_GREEN,
                GREEN, self.unpause_function, 150, 100)
             self.draw.Button(self.WIDTH-450, 2*self.HEIGHT/3, "QUIT", BRIGHT_RED, RED, quit, 150, 100)
@@ -243,6 +244,9 @@ class Game :
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     quit()
+                    
+                self.screen.fill(SKY_BLUE)
+                self.screen.blit(self.background, self.background_rect)    
                 self.draw.DrawRect(150,150,self.WIDTH-300,self.HEIGHT-300,GREEN_YELLOW) 
                 x=600
                 y=300
